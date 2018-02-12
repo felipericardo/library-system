@@ -22,8 +22,6 @@ class BooksController extends Controller
     {
         $this->booksRepository = $booksRepository;
         $this->categoriesRepository = $categoriesRepository;
-
-        $this->middleware('auth');
     }
 
     public function index()

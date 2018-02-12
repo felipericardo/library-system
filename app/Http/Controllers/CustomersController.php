@@ -15,7 +15,6 @@ class CustomersController extends Controller
     public function __construct(CustomersRepository $customersRepository)
     {
         $this->customersRepository = $customersRepository;
-        $this->middleware('auth');
     }
 
     public function index()

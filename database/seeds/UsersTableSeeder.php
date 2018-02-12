@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'contato@felipericardo.com',
             'password' => bcrypt('mudar123'),
             'name' => 'Felipe Ricardo',
+            'admin' => true,
         ]);
     }
 }
