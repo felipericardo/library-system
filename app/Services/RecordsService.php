@@ -160,4 +160,14 @@ class RecordsService
 
         return $records;
     }
+
+    public function getLastMonthRevenues()
+    {
+        return $this->recordsRepository->findClosedByMonth(date('m', strtotime('-1 month')));
+    }
+
+    public function getCurrentRevenues()
+    {
+        return $this->recordsRepository->findClosedByMonth(date('m'));
+    }
 }

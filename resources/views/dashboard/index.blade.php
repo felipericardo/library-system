@@ -36,16 +36,16 @@
                         <div class="col-md-3">
                             <div class="thumbnail">
                                 <div class="caption">
-                                    <h2 class="text-center"><small>R$</small> 1.602,40</h2>
-                                    <p class="text-center">Janeiro</p>
+                                    <h2 class="text-center"><small>R$</small> {{ money($lastMonthRevenues, false) }}</h2>
+                                    <p class="text-center">{{ monthText(date('m', strtotime('-1 month'))) }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="thumbnail">
                                 <div class="caption">
-                                    <h2 class="text-center"><small>R$</small> 143,20</h2>
-                                    <p class="text-center">Fevereiro</p>
+                                    <h2 class="text-center"><small>R$</small> {{ money($currentRevenues, false) }}</h2>
+                                    <p class="text-center">{{ monthText(date('m')) }}</p>
                                 </div>
                             </div>
                         </div>

@@ -44,12 +44,22 @@ class DashboardController extends Controller
     {
         $recordsOpen = $this->recordsService->findOpens();
         $recordsClosed = $this->recordsService->findClosed();
+
         $booksCount = $this->booksRepository->count();
         $recordsCount = count($recordsOpen);
         $lateCount = $this->recordsRepository->countLate();
 
+        $lastMonthRevenues = $this->recordsService->getLastMonthRevenues()->sum('amount');
+        $currentRevenues = $this->recordsService->getCurrentRevenues()->sum('amount');
+
         return view('dashboard.index', compact(
-            'booksCount', 'recordsCount', 'lateCount', 'recordsOpen', 'recordsClosed'
+            'booksCount',
+            'recordsCount',
+            'lateCount',
+            'recordsOpen',
+            'recordsClosed',
+            'lastMonthRevenues',
+            'currentRevenues'
         ));
     }
 }

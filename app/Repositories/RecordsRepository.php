@@ -122,6 +122,14 @@ class RecordsRepository
     }
 
     /**
+     * @return Record[]
+     */
+    public function findClosedByMonth($month)
+    {
+        return Record::whereMonth('real_end', '=', $month)->get();
+    }
+
+    /**
      * @return int
      */
     public function countLate()
