@@ -20,7 +20,7 @@
                         <div class="col-md-2">
                             <div class="thumbnail">
                                 <div class="caption">
-                                    <h2 class="text-center">4</h2>
+                                    <h2 class="text-center">{{ count($recordsOpen) }}</h2>
                                     <p class="text-center">Empréstimos</p>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                         <div class="col-md-2">
                             <div class="thumbnail">
                                 <div class="caption">
-                                    <h2 class="text-center">1</h2>
+                                    <h2 class="text-center">{{ $lateCount }}</h2>
                                     <p class="text-center">Atrasos</p>
                                 </div>
                             </div>
@@ -73,51 +73,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2</td>
-                                <td>O Rei Leão</td>
-                                <td>Felipe Ricardo</td>
-                                <td>09/02/2018</td>
-                                <td>
-                                    10/02/2018
-                                    <span class="label label-danger">atrasado</span>
-                                </td>
-                                <td>
-                                    R$ 1,00
-                                    <a tabindex="0" class="badge badge-error" role="button" data-toggle="popover" data-trigger="focus"
-                                       title="Multa por atraso!" data-content="R$ 0,20 + R$ 0,80">
-                                        <i class="fa fa-question"></i>
-                                    </a>
-                                </td>
-                                <td align="right">
-                                    <a href="{{ route('users.edit', 1) }}" class="btn btn-success btn-xs"><i class="fa fa-check"></i> Devolver</a>
-                                    <a href="{{ route('users.edit', 1) }}" class="btn btn-primary btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
-                                    <form action="{{ route('users.destroy', 1) }}" method="POST" style="display: inline;">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-danger btn-xs" title="Deletar"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>O Rei Leão</td>
-                                <td>Felipe Ricardo</td>
-                                <td>09/02/2018</td>
-                                <td>14/02/2018</td>
-                                <td>
-                                    R$ 1,00
-                                </td>
-                                <td align="right">
-                                    <a href="{{ route('users.edit', 1) }}" class="btn btn-success btn-xs"><i class="fa fa-check"></i> Devolver</a>
-                                    <a href="{{ route('users.edit', 1) }}" class="btn btn-primary btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
-                                    <form action="{{ route('users.destroy', 1) }}" method="POST" style="display: inline;">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-danger btn-xs" title="Deletar"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
+                            @forelse($recordsOpen as $record)
+                                <tr>
+                                    <td>{{ $record->id }}</td>
+                                    <td>{{ $record->book->title }}</td>
+                                    <td>{{ $record->customer->name }}</td>
+                                    <td>{{ convertDate('Y-m-d', 'd/m/Y', $record->start) }}</td>
+                                    <td>
+                                        {{ convertDate('Y-m-d', 'd/m/Y', $record->expected_end) }}
+                                        @if($record->has_late)
+                                            <span class="label label-danger">atrasado</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{ money($record->current_amount) }}
+                                        @if($record->has_late)
+                                            <a tabindex="0" class="badge badge-error" role="button" data-toggle="popover" data-placement="top" data-trigger="focus"
+                                               title="Multa por atraso!" data-content="{{ money($record->value) }} + {{ money($record->current_fee) }}">
+                                                <i class="fa fa-question"></i>
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td align="right">
+                                        <a href="{{ route('records.complete', $record->id) }}" class="btn btn-success btn-xs"><i class="fa fa-check"></i> Devolver</a>
+                                        <a href="{{ route('records.edit', $record->id) }}" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></a>
+                                        <form action="{{ route('records.destroy', $record->id) }}" method="POST" style="display: inline;">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Deletar"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td align="center" colspan="7">
+                                        Nenhum empréstimo encontrado!
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -141,46 +134,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>4</td>
-                                <td>O Rei Leão</td>
-                                <td>Felipe Ricardo</td>
-                                <td>09/02/2018</td>
-                                <td>10/02/2018</td>
-                                <td>12/02/2018</td>
-                                <td>
-                                    R$ 1,00
-                                    <a tabindex="0" class="badge badge-error" role="button" data-toggle="popover" data-trigger="focus"
-                                       title="Multa por atraso!" data-content="R$ 0,20 + R$ 0,80">
-                                        <i class="fa fa-question"></i>
-                                    </a>
-                                </td>
-                                <td align="right">
-                                    <form action="{{ route('users.destroy', 1) }}" method="POST" style="display: inline;">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-danger btn-xs" title="Deletar"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>O Rei Leão</td>
-                                <td>Felipe Ricardo</td>
-                                <td>01/02/2018</td>
-                                <td>02/02/2018</td>
-                                <td>02/02/2018</td>
-                                <td>
-                                    R$ 0,20
-                                </td>
-                                <td align="right">
-                                    <form action="{{ route('users.destroy', 1) }}" method="POST" style="display: inline;">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-danger btn-xs" title="Deletar"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
+                            @forelse($recordsClosed as $record)
+                                <tr>
+                                    <td>{{ $record->id }}</td>
+                                    <td>{{ $record->book->title }}</td>
+                                    <td>{{ $record->customer->name }}</td>
+                                    <td>{{ convertDate('Y-m-d', 'd/m/Y', $record->start) }}</td>
+                                    <td>{{ convertDate('Y-m-d', 'd/m/Y', $record->expected_end) }}</td>
+                                    <td>{{ convertDate('Y-m-d H:i:s', 'd/m/Y', $record->real_end) }}</td>
+                                    <td>
+                                        {{ money($record->amount) }}
+                                        @if($record->has_late)
+                                            <a tabindex="0" class="badge badge-error" role="button" data-toggle="popover" data-placement="top" data-trigger="focus"
+                                               title="Multa por atraso!" data-content="{{ money($record->value) }} + {{ money($record->fee) }}">
+                                                <i class="fa fa-question"></i>
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td align="right">
+                                        <form action="{{ route('records.destroy', $record->id) }}" method="POST" style="display: inline;">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Deletar"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td align="center" colspan="8">
+                                        Ainda não existe um histórico para mostrar!
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

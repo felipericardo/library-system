@@ -16,7 +16,7 @@
     <label for="document" class="col-md-4 control-label">CPF</label>
 
     <div class="col-md-6">
-        {{ Form::text('document', null, ['class' => 'form-control']) }}
+        {{ Form::text('document', null, ['class' => 'form-control mask-cpf']) }}
 
         @if ($errors->has('document'))
             <span class="help-block">
@@ -44,7 +44,7 @@
     <label for="birthdate" class="col-md-4 control-label">Nascimento</label>
 
     <div class="col-md-6">
-        {{ Form::text('birthdate', null, ['class' => 'form-control']) }}
+        {{ Form::text('birthdate', isset($customer) ? convertDate('Y-m-d', 'd/m/Y', $customer->birthdate) : null, ['class' => 'form-control mask-date']) }}
 
         @if ($errors->has('birthdate'))
             <span class="help-block">

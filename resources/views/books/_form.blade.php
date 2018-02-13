@@ -30,7 +30,7 @@
     <label for="quantity" class="col-md-4 control-label">Quantidade</label>
 
     <div class="col-md-6">
-        {{ Form::number('quantity', null, ['class' => 'form-control']) }}
+        {{ Form::number('quantity', null, ['class' => 'form-control', 'min' => 0]) }}
 
         @if ($errors->has('quantity'))
             <span class="help-block">

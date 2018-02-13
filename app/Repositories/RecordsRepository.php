@@ -96,6 +96,22 @@ class RecordsRepository
     }
 
     /**
+     * @return Record[]|null
+     */
+    public function findOpens()
+    {
+        return Record::where('real_end', null)->orderBy('expected_end', 'ASC')->get();
+    }
+
+    /**
+     * @return Record[]|null
+     */
+    public function findClosed()
+    {
+        return Record::where('real_end', '!=', null)->orderBy('real_end', 'DESC')->get();
+    }
+
+    /**
      * @param int $bookId
      *
      * @return Record[]|null
@@ -103,5 +119,13 @@ class RecordsRepository
     public function findOpensByBookId($bookId)
     {
         return Record::where(['book_id' => $bookId, 'real_end' => null])->get();
+    }
+
+    /**
+     * @return int
+     */
+    public function countLate()
+    {
+        return Record::where('expected_end', '<', date('Y-m-d'))->where('real_end', null)->count();
     }
 }

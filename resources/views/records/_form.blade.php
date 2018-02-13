@@ -30,7 +30,7 @@
     <label for="start" class="col-md-4 control-label">Retirada</label>
 
     <div class="col-md-6">
-        {{ Form::text('start', null, ['class' => 'form-control']) }}
+        {{ Form::text('start', isset($record) ? convertDate('Y-m-d', 'd/m/Y', $record->start) : null, ['class' => 'form-control datepicker']) }}
 
         @if ($errors->has('start'))
             <span class="help-block">
@@ -44,7 +44,7 @@
     <label for="expected_end" class="col-md-4 control-label">Devolução</label>
 
     <div class="col-md-6">
-        {{ Form::text('expected_end', null, ['class' => 'form-control']) }}
+        {{ Form::text('expected_end', isset($record) ? convertDate('Y-m-d', 'd/m/Y', $record->expected_end) : null, ['class' => 'form-control datepicker']) }}
 
         @if ($errors->has('expected_end'))
             <span class="help-block">

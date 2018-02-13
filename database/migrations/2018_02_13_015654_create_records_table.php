@@ -19,7 +19,7 @@ class CreateRecordsTable extends Migration
             $table->integer('book_id')->unsigned();
             $table->date('start');
             $table->date('expected_end');
-            $table->date('real_end')->nullable();
+            $table->datetime('real_end')->nullable();
             $table->decimal('value', 16, 2);
             $table->decimal('fee', 16, 2)->nullable();
             $table->decimal('amount', 16, 2)->nullable();

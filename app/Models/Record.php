@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Record extends Model
@@ -11,7 +12,10 @@ class Record extends Model
         'book_id',
         'start',
         'expected_end',
+        'real_end',
         'value',
+        'fee',
+        'amount',
     ];
 
     public function customer()
@@ -22,5 +26,20 @@ class Record extends Model
     public function book()
     {
         return $this->belongsTo(Book::class);
+    }
+
+    public function setStartAttribute($value)
+    {
+        $this->attributes['start'] = convertDate('d/m/Y', 'Y-m-d', $value);
+    }
+
+    public function setExpectedEndAttribute($value)
+    {
+        $this->attributes['expected_end'] = convertDate('d/m/Y', 'Y-m-d', $value);
+    }
+
+    public function hasFee()
+    {
+        return $this->fee > 0;
     }
 }

@@ -155,9 +155,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
         /*
-         * Custom Service Providers...
+         * Others Service Providers...
          */
         Collective\Html\HtmlServiceProvider::class,
 

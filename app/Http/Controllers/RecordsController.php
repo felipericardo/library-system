@@ -59,13 +59,6 @@ class RecordsController extends Controller
         $this->booksRepository = $booksRepository;
     }
 
-    public function index()
-    {
-        $records = $this->recordsRepository->findAll();
-
-        return view('records.index', compact('records'));
-    }
-
     public function create()
     {
         $customers = $this->customersRepository->lists();

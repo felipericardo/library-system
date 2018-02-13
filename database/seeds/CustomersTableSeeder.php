@@ -14,9 +14,9 @@ class CustomersTableSeeder extends Seeder
     {
         Customer::create([
             'name' => 'Felipe Ricardo do Nascimento',
-            'document' => '07168931938',
+            'document' => '071.689.319-38',
             'email' => 'contato@felipericardo.com',
-            'birthdate' => '1991-07-08',
+            'birthdate' => '08/07/1991',
         ]);
     }
 }

@@ -42,6 +42,11 @@ class BooksService
         return $book->quantity > count($records);
     }
 
+    /**
+     * @param int|null $include
+     *
+     * @return mixed
+     */
     public function listsAvailable($include = null)
     {
         $books = $this->booksRepository->lists();
