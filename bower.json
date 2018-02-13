@@ -1,0 +1,23 @@
+{
+  "name": "library-system",
+  "description": "",
+  "main": "public/js/app.js",
+  "authors": [
+    "Felipe Ricardo <contato@felipericardo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/felipericardo/library-system",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/assets/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "jquery-mask-plugin": "^1.14.13"
+  }
+}

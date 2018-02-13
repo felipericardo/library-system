@@ -6,25 +6,26 @@ Neste sistema podemos gerenciar os empréstimos de livros de uma biblioteca.
 ## Instalação / Configuração
 
 #### 1. Dependências
-Após clonar o projeto, devemos entrar no diretório e executar o composer para baixar as dependências:
+Após clonar o projeto, devemos entrar no diretório e executar o composer e o bower para baixar as dependências:
 ```shell
-composer install
+$ composer install
+$ bower install
 ```
 
 #### 2. Arquivo .env
 Para criar o arquivo .env devemos copiar o arquivo de exemplo:
 ```
-php -r "copy('.env.example', '.env');"
+$ php -r "copy('.env.example', '.env');"
 ```
 ou
 ```
-cp .env.example .env
+$ cp .env.example .env
 ```
 
 #### 3. Gerando a Key
 Vamos gerar uma key para o sistema criar senhas personalizadas:
 ```
-php artisan key:generate
+$ php artisan key:generate
 ```
 
 #### 4. Banco de Dados
@@ -41,7 +42,7 @@ DB_PASSWORD
 #### 5. Tabelas e Conteúdo Base
 Por último precisamos criar nossas tabelas e alimentar com o conteúdo base. Para isso basta executar a migration passando o parametro seed:
 ```
-php artisan migrate:refresh --seed
+$ php artisan migrate:refresh --seed
 ```
 
 ### Dados de Acesso
