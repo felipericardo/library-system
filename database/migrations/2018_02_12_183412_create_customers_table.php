@@ -17,8 +17,8 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->char('document', 11)->unique();
-            $table->string('email', 100);
-            $table->date('birthdate');
+            $table->string('email', 100)->nullable();
+            $table->date('birthdate')->nullable();
             $table->timestamps();
 
         });

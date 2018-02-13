@@ -17,5 +17,10 @@ class BooksTableSeeder extends Seeder
             'title' => 'O Rei Leão',
             'quantity' => 5,
         ]);
+        Book::create([
+            'category_id' => 4,
+            'title' => 'Steve Jobs',
+            'quantity' => 1,
+        ]);
     }
 }

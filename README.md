@@ -1,6 +1,6 @@
 # Biblioteca
 
-Neste sistema podemos gerenciar os empréstimos de livro de uma biblioteca.
+Neste sistema podemos gerenciar os empréstimos de livros de uma biblioteca.
 
 
 ## Instalação / Configuração

@@ -11,6 +11,11 @@ class DashboardController extends Controller
      */
     private $booksRepository;
 
+    /**
+     * DashboardController constructor.
+     *
+     * @param BooksRepository $booksRepository
+     */
     public function __construct(BooksRepository $booksRepository)
     {
         $this->booksRepository = $booksRepository;
@@ -18,7 +23,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $booksCount = count($this->booksRepository->all());
+        $booksCount = $this->booksRepository->count();
 
         return view('dashboard.index', compact('booksCount'));
     }

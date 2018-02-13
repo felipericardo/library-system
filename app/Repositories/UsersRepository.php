@@ -23,15 +23,15 @@ class UsersRepository
     }
 
     /**
-     * @param array $request
+     * @param array $data
      *
      * @return User|bool
      */
-    public function create(array $request)
+    public function create(array $data)
     {
         $user = new User();
-        $request['password'] = bcrypt($request['password']);
-        $user->fill($request);
+        $data['password'] = bcrypt($data['password']);
+        $user->fill($data);
         try {
             $user->save();
         } catch (Exception $e) {
@@ -45,21 +45,21 @@ class UsersRepository
 
     /**
      * @param int $id
-     * @param array $request
+     * @param array $data
      *
      * @return User|bool
      */
-    public function update($id, array $request)
+    public function update($id, array $data)
     {
         $user = $this->findById($id);
         if (!$user) {
             return false;
         }
 
-        if (isset($request['password']) && !empty($request['password'])) {
-            $request['password'] = bcrypt($request['password']);
+        if (isset($data['password']) && !empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
         }
-        $user->fill($request);
+        $user->fill($data);
         try {
             $user->save();
         } catch (Exception $e) {
@@ -76,7 +76,7 @@ class UsersRepository
      *
      * @return bool
      */
-    public function destroy($id)
+    public function delete($id)
     {
         return User::destroy($id) > 0;
     }
@@ -84,13 +84,13 @@ class UsersRepository
     /**
      * @return User[]
      */
-    public function all()
+    public function findAll()
     {
         return User::all();
     }
 
     /**
-     * @param $id
+     * @param int $id
      *
      * @return User|null
      */

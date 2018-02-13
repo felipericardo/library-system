@@ -56,7 +56,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Empréstimos
-                    <a href="{{ route('users.create') }}" class="btn btn-success btn-xs pull-right" title="Cadastrar"><i class="fa fa-plus"></i> Novo empréstimo</a>
+                    <a href="{{ route('records.create') }}" class="btn btn-success btn-xs pull-right" title="Cadastrar"><i class="fa fa-plus"></i> Novo empréstimo</a>
                 </div>
 
                 <div class="panel-body">

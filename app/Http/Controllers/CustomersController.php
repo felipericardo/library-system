@@ -12,6 +12,11 @@ class CustomersController extends Controller
      */
     private $customersRepository;
 
+    /**
+     * CustomersController constructor.
+     *
+     * @param CustomersRepository $customersRepository
+     */
     public function __construct(CustomersRepository $customersRepository)
     {
         $this->customersRepository = $customersRepository;
@@ -19,7 +24,7 @@ class CustomersController extends Controller
 
     public function index()
     {
-        $customers = $this->customersRepository->all();
+        $customers = $this->customersRepository->findAll();
 
         return view('customers.index', compact('customers'));
     }
@@ -56,7 +61,7 @@ class CustomersController extends Controller
 
     public function destroy($id)
     {
-        $this->customersRepository->destroy($id);
+        $this->customersRepository->delete($id);
 
         return redirect()->route('customers.index');
     }

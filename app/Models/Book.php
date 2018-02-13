@@ -12,4 +12,9 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
 }

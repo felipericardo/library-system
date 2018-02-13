@@ -2,69 +2,69 @@
 
 namespace App\Repositories;
 
-use App\Models\Customer;
+use App\Factories\RecordsFactory;
+use App\Models\Record;
 use Exception;
 
-class CustomersRepository
+class RecordsRepository
 {
     /**
-     * @var Customer
+     * @var Record
      */
-    private $customer;
+    private $record;
 
     /**
-     * CustomersRepository constructor.
+     * RecordsRepository constructor.
      *
-     * @param Customer $customer
+     * @param Record $record
      */
-    public function __construct(Customer $customer)
+    public function __construct(Record $record)
     {
-        $this->customer = $customer;
+        $this->record = $record;
     }
 
     /**
      * @param array $data
      *
-     * @return Customer|bool
+     * @return Record|bool
      */
     public function create(array $data)
     {
-        $customer = new Customer();
-        $customer->fill($data);
+        $record = RecordsFactory::fromArray($data);
         try {
-            $customer->save();
+            $record->save();
         } catch (Exception $e) {
             // Send error to bugsnag, sentry or similar...
 
             return false;
         }
 
-        return $customer;
+        return $record;
     }
 
     /**
      * @param int $id
      * @param array $data
      *
-     * @return Customer|bool
+     * @return Record|bool
      */
     public function update($id, array $data)
     {
-        $customer = $this->findById($id);
-        if (!$customer) {
+        $record = $this->findById($id);
+        if (!$record) {
             return false;
         }
 
-        $customer->fill($data);
+        $record->fill($data);
         try {
-            $customer->save();
+            $record->save();
         } catch (Exception $e) {
             // Send error to bugsnag, sentry or similar...
 
             return false;
         }
 
-        return $customer;
+        return $record;
     }
 
     /**
@@ -74,32 +74,34 @@ class CustomersRepository
      */
     public function delete($id)
     {
-        return Customer::destroy($id) > 0;
+        return Record::destroy($id) > 0;
     }
 
     /**
-     * @return Customer[]
+     * @return Record[]
      */
     public function findAll()
     {
-        return Customer::all();
+        return Record::all();
     }
 
     /**
      * @param int $id
      *
-     * @return Customer|null
+     * @return Record|null
      */
     public function findById($id)
     {
-        return Customer::where('id', $id)->first();
+        return Record::where('id', $id)->first();
     }
 
     /**
-     * @return mixed
+     * @param int $bookId
+     *
+     * @return Record[]|null
      */
-    public function lists()
+    public function findOpensByBookId($bookId)
     {
-        return Customer::lists('name', 'id');
+        return Record::where(['book_id' => $bookId, 'real_end' => null])->get();
     }
 }

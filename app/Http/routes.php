@@ -9,4 +9,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('categories', 'CategoriesController');
     Route::resource('books', 'BooksController');
     Route::resource('customers', 'CustomersController');
+    Route::resource('records', 'RecordsController');
 });

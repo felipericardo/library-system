@@ -12,6 +12,11 @@ class CategoriesController extends Controller
      */
     private $categoriesRepository;
 
+    /**
+     * CategoriesController constructor.
+     *
+     * @param CategoriesRepository $categoriesRepository
+     */
     public function __construct(CategoriesRepository $categoriesRepository)
     {
         $this->categoriesRepository = $categoriesRepository;
@@ -19,7 +24,7 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $categories = $this->categoriesRepository->all();
+        $categories = $this->categoriesRepository->findAll();
 
         return view('categories.index', compact('categories'));
     }
@@ -56,7 +61,7 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-        $this->categoriesRepository->destroy($id);
+        $this->categoriesRepository->delete($id);
 
         return redirect()->route('categories.index');
     }

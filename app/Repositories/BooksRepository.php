@@ -23,14 +23,14 @@ class BooksRepository
     }
 
     /**
-     * @param array $request
+     * @param array $data
      *
      * @return Book|bool
      */
-    public function create(array $request)
+    public function create(array $data)
     {
         $book = new Book();
-        $book->fill($request);
+        $book->fill($data);
         try {
             $book->save();
         } catch (Exception $e) {
@@ -44,22 +44,21 @@ class BooksRepository
 
     /**
      * @param int $id
-     * @param array $request
+     * @param array $data
      *
      * @return Book|bool
      */
-    public function update($id, array $request)
+    public function update($id, array $data)
     {
         $book = $this->findById($id);
         if (!$book) {
             return false;
         }
 
-        $book->fill($request);
+        $book->fill($data);
         try {
             $book->save();
         } catch (Exception $e) {
-            dd($e->getMessage());
             // Send error to bugsnag, sentry or similar...
 
             return false;
@@ -73,7 +72,7 @@ class BooksRepository
      *
      * @return bool
      */
-    public function destroy($id)
+    public function delete($id)
     {
         return Book::destroy($id) > 0;
     }
@@ -81,18 +80,34 @@ class BooksRepository
     /**
      * @return Book[]
      */
-    public function all()
+    public function findAll()
     {
         return Book::all();
     }
 
     /**
-     * @param $id
+     * @param int $id
      *
      * @return Book|null
      */
     public function findById($id)
     {
         return Book::where('id', $id)->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function lists()
+    {
+        return Book::lists('title', 'id');
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->findAll());
     }
 }

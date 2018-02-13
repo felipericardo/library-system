@@ -13,6 +13,11 @@ class UsersController extends Controller
      */
     private $usersRepository;
 
+    /**
+     * UsersController constructor.
+     *
+     * @param UsersRepository $usersRepository
+     */
     public function __construct(UsersRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
@@ -20,7 +25,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = $this->usersRepository->all();
+        $users = $this->usersRepository->findAll();
 
         return view('users.index', compact('users'));
     }
@@ -60,7 +65,7 @@ class UsersController extends Controller
         if (Auth::user()->id == $id) {
             // code...
         } else {
-            $this->usersRepository->destroy($id);
+            $this->usersRepository->delete($id);
         }
 
         return redirect()->route('users.index');

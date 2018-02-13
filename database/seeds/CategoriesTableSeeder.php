@@ -21,5 +21,8 @@ class CategoriesTableSeeder extends Seeder
         Category::create([
             'name' => 'Drama',
         ]);
+        Category::create([
+            'name' => 'Biografia',
+        ]);
     }
 }

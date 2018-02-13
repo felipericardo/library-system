@@ -18,6 +18,12 @@ class BooksController extends Controller
      */
     private $categoriesRepository;
 
+    /**
+     * BooksController constructor.
+     *
+     * @param BooksRepository $booksRepository
+     * @param CategoriesRepository $categoriesRepository
+     */
     public function __construct(BooksRepository $booksRepository, CategoriesRepository $categoriesRepository)
     {
         $this->booksRepository = $booksRepository;
@@ -26,7 +32,7 @@ class BooksController extends Controller
 
     public function index()
     {
-        $books = $this->booksRepository->all();
+        $books = $this->booksRepository->findAll();
 
         return view('books.index', compact('books'));
     }
@@ -49,8 +55,9 @@ class BooksController extends Controller
 
     public function edit($id)
     {
-        $categories = $this->categoriesRepository->lists();
         $book = $this->booksRepository->findById($id);
+
+        $categories = $this->categoriesRepository->lists();
 
         return view('books.edit', compact('categories', 'book'));
     }
@@ -66,7 +73,7 @@ class BooksController extends Controller
 
     public function destroy($id)
     {
-        $this->booksRepository->destroy($id);
+        $this->booksRepository->delete($id);
 
         return redirect()->route('books.index');
     }

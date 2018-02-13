@@ -23,14 +23,14 @@ class CategoriesRepository
     }
 
     /**
-     * @param array $request
+     * @param array $data
      *
      * @return Category|bool
      */
-    public function create(array $request)
+    public function create(array $data)
     {
         $category = new Category();
-        $category->fill($request);
+        $category->fill($data);
         try {
             $category->save();
         } catch (Exception $e) {
@@ -44,18 +44,18 @@ class CategoriesRepository
 
     /**
      * @param int $id
-     * @param array $request
+     * @param array $data
      *
      * @return Category|bool
      */
-    public function update($id, array $request)
+    public function update($id, array $data)
     {
         $category = $this->findById($id);
         if (!$category) {
             return false;
         }
 
-        $category->fill($request);
+        $category->fill($data);
         try {
             $category->save();
         } catch (Exception $e) {
@@ -72,7 +72,7 @@ class CategoriesRepository
      *
      * @return bool
      */
-    public function destroy($id)
+    public function delete($id)
     {
         return Category::destroy($id) > 0;
     }
@@ -80,13 +80,13 @@ class CategoriesRepository
     /**
      * @return Category[]
      */
-    public function all()
+    public function findAll()
     {
         return Category::all();
     }
 
     /**
-     * @param $id
+     * @param int $id
      *
      * @return Category|null
      */
