@@ -1,0 +1,12 @@
+/* General */
+.badge-error {
+    background-color: #d9534f;
+}
+.badge-error:hover {
+    background-color: #c9302c;
+}
+
+/* Dashboard */
+.dashboard .thumbnail {
+    margin-bottom: 0;
+}

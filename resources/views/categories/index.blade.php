@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Lista
+                    Categorias
                     <a href="{{ route('categories.create') }}" class="btn btn-success btn-xs pull-right" title="Cadastrar"><i class="fa fa-plus"></i></a>
                 </div>
                 <div class="panel-body">
