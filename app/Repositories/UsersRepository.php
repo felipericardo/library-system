@@ -56,8 +56,12 @@ class UsersRepository
             return false;
         }
 
-        if (isset($data['password']) && !empty($data['password'])) {
-            $data['password'] = bcrypt($data['password']);
+        if (isset($data['password'])) {
+            if (!empty($data['password'])) {
+                $data['password'] = bcrypt($data['password']);
+            } else {
+                unset($data['password']);
+            }
         }
         $user->fill($data);
         try {
