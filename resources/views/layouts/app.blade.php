@@ -67,8 +67,11 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ route('users.index') }}"><i class="fa fa-btn fa-user"></i>Usuários</a></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Sair</a></li>
+                                @can('manage_users')
+                                    <li><a href="{{ route('users.index') }}"><i class="fa fa-btn fa-user"></i>Usuários</a></li>
+                                @endcan
+                                <li><a href="{{ route('profile.edit') }}"><i class="fa fa-btn fa-cog"></i>Meus Dados</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Sair do Sistema</a></li>
                             </ul>
                         </li>
                     @endif

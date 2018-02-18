@@ -5,6 +5,8 @@ Route::auth();
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+    Route::get('/profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+    Route::put('/profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 
     Route::resource('users', 'UsersController');
     Route::resource('categories', 'CategoriesController');

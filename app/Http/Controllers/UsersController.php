@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
@@ -21,6 +22,10 @@ class UsersController extends Controller
     public function __construct(UsersRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
+
+        if (Gate::denies('manage_users')) {
+            abort(403);
+        }
     }
 
     public function index()
